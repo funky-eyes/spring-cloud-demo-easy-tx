@@ -1,0 +1,5 @@
+funkye:
+   rocket:
+      name-server: 127.0.0.1:9876
+      group: test-group
+      topic: test
