@@ -33,10 +33,4 @@ public class TestController {
         return true;
     }
 
-    @GetMapping(value = "testCommit")
-    public Object testCommit(String xid) {
-        testService.testCommit(xid);
-        return true;
-    }
-
 }
