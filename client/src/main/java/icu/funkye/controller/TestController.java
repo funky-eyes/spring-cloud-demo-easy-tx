@@ -26,9 +26,9 @@ public class TestController {
      * 
      * @return
      */
-    @GetMapping(value = "seataCommit")
+    @GetMapping(value = "commit")
     @GlobalTransaction
-    public Object seataCommit() {
+    public Object commit() {
         testService.commit();
         return true;
     }
