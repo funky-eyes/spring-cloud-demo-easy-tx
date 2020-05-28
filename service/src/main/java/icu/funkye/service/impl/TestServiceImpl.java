@@ -15,7 +15,8 @@ public class TestServiceImpl extends ServiceImpl<TestMapper, Test> implements IT
     @Transactional
     public Object Commit() {
         Test t = getOne(Wrappers.<Test>query().eq("id", 1).last("for update"));
-        update(Wrappers.<Test>lambdaUpdate().eq(Test::getId, t.getId()).setSql("two=two+1"));
+        t.setTwo(t.getTwo() + 1);
+        updateById(t);
         return true;
     }
 
