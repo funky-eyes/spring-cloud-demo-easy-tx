@@ -3,6 +3,7 @@ package icu.funkye.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,8 +18,11 @@ public class ProviderController {
 
     @RequestMapping("/commit")
     @GlobalTransaction
+    @Transactional
     public Object commit() {
-        return testService.Commit();
+        testService.Commit(2);
+        testService.Commit(1);
+        return true;
     }
 
 }

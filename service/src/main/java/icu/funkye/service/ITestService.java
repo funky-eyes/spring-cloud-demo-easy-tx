@@ -14,5 +14,5 @@ import icu.funkye.entity.Test;
  */
 public interface ITestService extends IService<Test> {
 
-    Object Commit();
+    Object Commit(Integer id);
 }
