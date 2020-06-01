@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @since 2019-04-10
  */
 @FeignClient(value="demo-service")
+@RequestMapping(value = "provider")
 public interface ITestService {
     @RequestMapping(value = "/commit")
     Object commit();
