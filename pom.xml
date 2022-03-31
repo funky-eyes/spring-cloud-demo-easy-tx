@@ -15,7 +15,7 @@
     </modules>
     <properties>
         <java.version>1.8</java.version>
-        <alibaba.cloud.version>2.2.1.RELEASE</alibaba.cloud.version>
+        <alibaba.cloud.version>2.5.12</alibaba.cloud.version>
     </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
