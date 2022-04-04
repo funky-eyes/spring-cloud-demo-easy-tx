@@ -13,10 +13,19 @@ public class SagaTestService {
 
     @SagaTransaction(confirm = "commitLocal", clazz = SagaTestService.class, cancel = "rollbackLocal")
     public Object commitLocal(int id) {
-        if (!ThreadLocalRandom.current().nextBoolean()) {
-            throw new RuntimeException();
+        if (ThreadLocalRandom.current().nextInt(10)<2) {
+            throw new RuntimeException(" commitLocal 模拟失败");
         }
         logger.info("commitLocal: {}", id);
+        return true;
+    }
+
+    @SagaTransaction(confirm = "commitLocal2", clazz = SagaTestService.class, cancel = "rollbackLocal2")
+    public Object commitLocal2(int id) {
+        if (ThreadLocalRandom.current().nextInt(10)<2) {
+            throw new RuntimeException(" commitLocal2 模拟失败");
+        }
+        logger.info("commitLocal2: {}", id);
         return true;
     }
 
@@ -25,6 +34,14 @@ public class SagaTestService {
             throw new RuntimeException();
         }
         logger.info("rollbackLocal: {}", id);
+        return true;
+    }
+
+    public Object rollbackLocal2(int id) {
+        if (!ThreadLocalRandom.current().nextBoolean()) {
+            throw new RuntimeException();
+        }
+        logger.info("rollbackLocal2: {}", id);
         return true;
     }
 
