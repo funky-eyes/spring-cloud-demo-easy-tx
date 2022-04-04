@@ -1,7 +1,14 @@
 easy:
   tx:
     enable: true
+    onlyUseMode: saga
     rocket:
       name-server: 127.0.0.1:9876
       group: test-group
       topic: test
+    client-id: cjb-test
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    timeout: 6000

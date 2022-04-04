@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Logback Configuration. -->
+<configuration>
+	<include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${CONSOLE_LOG_PATTERN}</pattern>
+			<charset>utf8</charset>
+		</encoder>
+	</appender>
+	<!-- 生成日志文件 -->
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- 日志格式 -->
+		<encoder>
+			<pattern>${FILE_LOG_PATTERN}</pattern>
+		</encoder>
+		<!--日志文件输出的文件名 -->
+		<file>${LOG_PATH}/app.log</file>
+
+		<!-- 固定数量的日志文件，防止将磁盘占满 -->
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<fileNamePattern>${LOG_PATH}/app.log.%i</fileNamePattern>
+			<minIndex>1</minIndex>
+			<maxIndex>10</maxIndex>
+		</rollingPolicy>
+
+		<!--日志文件最大的大小 -->
+		<triggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>100MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+
+	<!-- ibatis log start -->
+	<logger name="com.ibatis" level="INFO"/>
+	<logger name="com.ibatis.common.jdbc.SimpleDataSource" level="INFO"/>
+	<logger name="com.ibatis.common.jdbc.ScriptRunner" level="INFO"/>
+	<logger name="com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate" level="INFO"/>
+	<logger name="java.sql.Connection" level="INFO"/>
+	<logger name="java.sql.Statement" level="INFO"/>
+	<logger name="java.sql.PreparedStatement" level="INFO"/>
+	<logger name="java.sql.ResultSet" level="INFO"/>
+	<!-- ibatis log end -->
+
+	<logger name="DEFAULT_AUDIT_LOGGER" additivity="false" level="INFO"/>
+	<logger name="org.apache.zookeeper" additivity="false" level="ERROR"/>
+	<!-- 生成日志文件 -->
+	<appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>ERROR</level>
+		</filter>
+		<!-- 日志格式 -->
+		<encoder>
+			<pattern>${FILE_LOG_PATTERN}</pattern>
+		</encoder>
+		<!--日志文件输出的文件名 -->
+		<file>${LOG_PATH}/error.log</file>
+
+		<!-- 固定数量的日志文件，防止将磁盘占满 -->
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<fileNamePattern>${LOG_PATH}/error.log.%i</fileNamePattern>
+			<minIndex>1</minIndex>
+			<maxIndex>10</maxIndex>
+		</rollingPolicy>
+
+		<!--日志文件最大的大小 -->
+		<triggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>100MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+	<root>
+		<level value="INFO"/>
+		<appender-ref ref="FILE"/>
+		<appender-ref ref="ERROR_FILE"/>
+		<appender-ref ref="CONSOLE"/>
+	</root>
+</configuration>
